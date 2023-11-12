@@ -17,10 +17,8 @@ namespace Week4C_CodingBuddy
     public partial class Form1 : Form
     {
         int plankSpeed = 10;
-        int waterSpeed = 5;
         int Score = 0;
         Random rnd = new Random();
-        List<PictureBox> list = new List<PictureBox>();
 
         public Form1()
         {
@@ -31,13 +29,13 @@ namespace Week4C_CodingBuddy
 
         private void Start()
         {
-            waterSpeed = 5;
             Score = 0;
             scoreTimer.Start();
         }
         private void button1_Click(object sender, EventArgs e)
         {
             Start();
+            //plank first spawns
             plank1.Left = rnd.Next(-700, -50);
             plank2.Left = rnd.Next(900, 1400);
             plank3.Left = rnd.Next(-700, -50);
@@ -56,7 +54,7 @@ namespace Week4C_CodingBuddy
                 Score++;
                 label1.Text = "" + Score;
 
-                //plank spawn
+                //plank spawns
                 plank1.Left += plankSpeed;
                 plank2.Left -= plankSpeed;
                 plank3.Left += plankSpeed;
@@ -66,7 +64,7 @@ namespace Week4C_CodingBuddy
                 plank7.Left += plankSpeed;
                 plank8.Left -= plankSpeed;
 
-                //planks
+                //plank random spawns
                 if (plank1.Left > 900)
                 {
                     plank1.Left = rnd.Next(-700, -50);
@@ -104,6 +102,7 @@ namespace Week4C_CodingBuddy
             }
         }
 
+        //movement
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             int x = turkin.Location.X;
@@ -117,6 +116,7 @@ namespace Week4C_CodingBuddy
             turkin.Location = new Point(x, y);
         }
 
+        //Collision if intersetcts with plank1 it's fine if not then movement stops. 
         private void collision()
         {
             if(turkin.Bounds.IntersectsWith(plank1.Bounds))
